@@ -1,3 +1,5 @@
+import React from "react";
+import * as Tone from "tone";
 import "./app.css";
 
 type Props = {
@@ -7,25 +9,34 @@ type Props = {
 export default function App({ samples, numOfSteps }: Props) {
   const trackIds = [...Array(samples.length).keys()] as const;
   const stepIds = [...Array(numOfSteps).keys()] as const;
+  const [isPlaying, setIsPlaying] = React.useState(false);
 
   return (
-    <div className="container">
-      <div className="container__grid">
-        <div className="container__grid__list">
+    <section className="container">
+      <div className="container__player">
+        <button className="container__player__onoff">
+          {isPlaying ? "■" : "▶"}
+        </button>
+      </div>
+      <div className="container__flex">
+        <div className="container__flex__list">
           {trackIds.map((trackId) => (
-            <div key={trackId} className="container__grid__list__row">
+            <div key={trackId} className="container__flex__list__row">
               {stepIds.map((stepId) => {
                 const id = trackId + "-" + stepId;
-                const groupIndex = Math.floor(stepId / 4); // Récupérer le groupe de 4 colonnes actuel (0, 1, 2, ...)
-                const bgColorClass = groupIndex % 2 === 0 ? "gray-bg" : "red-bg";
+                const groupIndex = Math.floor(stepId / 4);
+                const bgColorClass =
+                  groupIndex % 2 === 0 ? "gray-bg" : "red-bg";
                 return (
-                  <label key={id} className="container__grid__list__row__cell">
+                  <label key={id} className="container__flex__list__row__cell">
                     <input
                       id={id}
                       type="checkbox"
-                      className="container__grid__list__row__cell__input"
+                      className="container__flex__list__row__cell__input"
                     />
-                    <div className={`container__grid__list__row__cell__content ${bgColorClass}`} />
+                    <div
+                      className={`container__flex__list__row__cell__content ${bgColorClass}`}
+                    />
                   </label>
                 );
               })}
@@ -33,6 +44,6 @@ export default function App({ samples, numOfSteps }: Props) {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

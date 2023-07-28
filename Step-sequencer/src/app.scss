@@ -9,30 +9,49 @@
   white-space: nowrap;
   position: absolute;
 }
-
-.container__grid__list {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-  &__row {
+.container {
+  background-color: rgb(49, 49, 49);
+  padding: 20px;
+  border-radius: 10px;
+  border: solid 5px rgb(162, 162, 162);
+  &__player__onoff {
+    border: none;
+    background-color: rgb(143, 192, 143);
+    border-radius: 3px;
+    margin-bottom: 15px;
+    &:hover {
+      background-color: rgb(98, 146, 98);
+    }
+  }
+  &__flex__list {
     display: flex;
-    column-gap: 10px;
-    &__cell {
-      cursor: pointer;
-      &__input {
-        @include invisibleInput();
-      }
-      &__content {
-        width: 20px;
-        height: 40px;
-        border-radius: 3px;
+    flex-direction: column;
+    row-gap: 10px;
+    &__row {
+      display: flex;
+      column-gap: 5px;
+      &__cell {
+        $cell: &;
+        cursor: pointer;
+        &__input {
+          @include invisibleInput();
 
-        &.gray-bg {
-          background-color: rgb(123, 123, 123);
+          &:checked + #{$cell}__content {
+            background-color: rgb(228, 22, 22);
+          }
         }
+        &__content {
+          width: 20px;
+          height: 40px;
+          border-radius: 3px;
 
-        &.red-bg {
-          background-color: rgb(100, 150, 107);
+          &.gray-bg {
+            background-color: rgb(172, 172, 172);
+          }
+
+          &.red-bg {
+            background-color: rgb(100, 150, 107);
+          }
         }
       }
     }

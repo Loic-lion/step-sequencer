@@ -1,17 +1,32 @@
-.container__grid__list {
+.container {
+  background-color: rgb(49, 49, 49);
+  padding: 20px;
+  border-radius: 10px;
+  border: solid 5px rgb(162, 162, 162);
+}
+.container__player__onoff {
+  border: none;
+  background-color: rgb(143, 192, 143);
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+.container__player__onoff:hover {
+  background-color: rgb(98, 146, 98);
+}
+.container__flex__list {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
-.container__grid__list__row {
+.container__flex__list__row {
   display: flex;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
 }
-.container__grid__list__row__cell {
+.container__flex__list__row__cell {
   cursor: pointer;
 }
-.container__grid__list__row__cell__input {
+.container__flex__list__row__cell__input {
   border: 0px;
   -webkit-clip-path: rect(0px, 0px, 0px, 0px);
           clip-path: rect(0px, 0px, 0px, 0px);
@@ -23,14 +38,17 @@
   white-space: nowrap;
   position: absolute;
 }
-.container__grid__list__row__cell__content {
+.container__flex__list__row__cell__input:checked + .container__flex__list__row__cell__content {
+  background-color: rgb(228, 22, 22);
+}
+.container__flex__list__row__cell__content {
   width: 20px;
   height: 40px;
   border-radius: 3px;
 }
-.container__grid__list__row__cell__content.gray-bg {
-  background-color: rgb(123, 123, 123);
+.container__flex__list__row__cell__content.gray-bg {
+  background-color: rgb(172, 172, 172);
 }
-.container__grid__list__row__cell__content.red-bg {
+.container__flex__list__row__cell__content.red-bg {
   background-color: rgb(100, 150, 107);
 }/*# sourceMappingURL=app.css.map */
