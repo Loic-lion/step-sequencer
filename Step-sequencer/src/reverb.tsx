@@ -14,6 +14,7 @@ const ReverbControl: React.FC<ReverbControlProps> = ({ synth }) => {
     roomSize: 0.7,
     dampening: 3000,
   });
+  const [isReverbActive, setIsReverbActive] = useState(true); // Initial state set to true
 
   const handleReverbChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -26,8 +27,13 @@ const ReverbControl: React.FC<ReverbControlProps> = ({ synth }) => {
   useEffect(() => {
     if (reverb) {
       reverb.set(reverbOptions);
+      if (isReverbActive) {
+        reverb.wet.value = reverbOptions.wet; // Set wetness explicitly
+      } else {
+        reverb.wet.value = 0; // Disable reverb by setting wetness to 0
+      }
     }
-  }, [reverb, reverbOptions]);
+  }, [reverb, reverbOptions, isReverbActive]);
 
   const initializeReverb = () => {
     const newReverb = new Tone.Reverb().toDestination();
@@ -39,9 +45,16 @@ const ReverbControl: React.FC<ReverbControlProps> = ({ synth }) => {
     initializeReverb();
   }
 
+  const toggleReverb = () => {
+    setIsReverbActive(!isReverbActive);
+  };
+
   return (
     <div className="reverb-control">
       <h2>Reverb</h2>
+      <div>
+        <button onClick={toggleReverb}>{isReverbActive ? "ON" : "OFF"}</button>
+      </div>
       <div>
         <label>Wetness</label>
         <input

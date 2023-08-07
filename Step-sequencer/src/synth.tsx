@@ -96,12 +96,14 @@ const Synthetizer: React.FC = () => {
       <div className="synth__head">
         <h1>Synth</h1>
       </div>
+      <hr />
       <div className="synth__effect">
         <ReverbControl synth={synth} />
         <TremoloControl synth={synth} />
-        <TremoloControl synth={synth} />
-        <TremoloControl synth={synth} />
       </div>
+      <hr />
+      <div>modulation</div>
+      <hr />
       <div>clavier</div>
     </section>
   );
