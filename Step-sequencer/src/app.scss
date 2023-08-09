@@ -190,27 +190,55 @@ table {
   width: 500px;
   background-color: rgb(100, 23, 23);
   border-radius: 10px;
-  border: solid 5px rgb(106, 68, 68);
+  border: solid 5px rgb(109, 85, 85);
   hr {
     width: 90%;
   }
   &__head {
+    color: white;
     h1 {
       font-size: 30px;
-      margin: 10px;
+      margin: 10px 0px 10px 0px;
       color: white;
     }
+    &__options {
+      width: 400px;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      column-gap: 10px;
+
+      div {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        select,
+        input {
+          border: none;
+          background-color: rgb(255, 255, 255);
+          border-radius: 3px;
+        }
+
+        input {
+          width: 35px;
+        }
+      }
+    }
   }
+
   &__effect {
     display: flex;
     margin: 10px;
     width: 450px;
-    overflow: hidden; /* Masque le contenu dépassant */
-    overflow-x: scroll; /* Affiche toujours la barre de défilement verticale */
+    overflow: hidden;
+    overflow-x: scroll;
     .reverb-control,
     .tremolo-control {
       height: fit-content;
-      min-width: 150px; /* Utilisez min-width au lieu de width */
+      min-width: 150px;
       padding: 10px;
       background-color: rgb(167, 36, 36);
       border-radius: 10px;

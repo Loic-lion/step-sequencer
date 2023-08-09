@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
-import ReverbControl from "./reverb";
-import TremoloControl from "./tremolo";
+import ReverbControl from "../effects/reverb";
+import TremoloControl from "../effects/tremolo";
+import ChorusControl from "../effects/chorus";
+import SynthOptions from "./option-synth";
 
 const Synthetizer: React.FC = () => {
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
@@ -94,12 +96,14 @@ const Synthetizer: React.FC = () => {
   return (
     <section className="synth">
       <div className="synth__head">
-        <h1>Synth</h1>
+        <h1>PolySynth</h1>
+        <SynthOptions synth={synth} />
       </div>
       <hr />
       <div className="synth__effect">
         <ReverbControl synth={synth} />
         <TremoloControl synth={synth} />
+        <ChorusControl synth={synth} />
       </div>
       <hr />
       <div>modulation</div>

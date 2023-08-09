@@ -1,7 +1,7 @@
 import React from "react";
 import * as Tone from "tone";
 import "./app.css";
-import Synthetizer from "./synth";
+import Synthetizer from "./components/synth/synth";
 
 type Props = {
   samples: { url: string; name: string }[];

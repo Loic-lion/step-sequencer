@@ -9,7 +9,7 @@ const TremoloControl: React.FC<TremoloControlProps> = ({ synth }) => {
   const [tremolo, setTremolo] = useState<Tone.Tremolo | null>(null);
   const [tremoloOptions, setTremoloOptions] = useState({
     frequency: 5,
-    type: "sine" as Tone.OscillatorType,
+    type: "sine" as Tone.ToneOscillatorType,
     depth: 0.5,
     spread: 180,
     wet: 0.5,
@@ -59,7 +59,7 @@ const TremoloControl: React.FC<TremoloControlProps> = ({ synth }) => {
     const { value } = event.target;
     setTremoloOptions((prevOptions) => ({
       ...prevOptions,
-      type: value as Tone.OscillatorType,
+      type: value as Tone.ToneOscillatorType,
     }));
   };
 
