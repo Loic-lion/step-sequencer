@@ -126,7 +126,7 @@ const PhaserControl: React.FC<PhaserControlProps> = ({ synth }) => {
         />
       </div>
       <div>
-        <label>Base Frequency</label>
+        <label>Base Freq.</label>
         <input
           type="range"
           name="baseFrequency"
