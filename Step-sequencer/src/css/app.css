@@ -129,6 +129,10 @@ table {
   border-spacing: 0;
 }
 
+body {
+  background-color: #cacaca;
+}
+
 .container {
   background-color: rgb(49, 49, 49);
   padding: 20px;
@@ -140,6 +144,7 @@ table {
 }
 .container__player input {
   margin-top: 5px;
+  color: white;
 }
 .container__player__onoff {
   text-align: center;
@@ -261,8 +266,7 @@ table {
   justify-content: space-between;
   margin-bottom: 10px;
 }
-.synth__head__options div select,
-.synth__head__options div input {
+.synth__head__options div select {
   border: none;
   border-radius: 3px;
   width: 50px;
@@ -273,35 +277,67 @@ table {
 }
 .synth__effect .reverb-control,
 .synth__effect .tremolo-control,
-.synth__effect .chorus-control {
+.synth__effect .distortion-control,
+.synth__effect .chorus-control,
+.synth__effect .delay-control {
   height: -moz-fit-content;
   height: fit-content;
   min-width: 150px;
+  min-height: 132px;
   padding: 10px;
   background-color: rgb(162, 162, 162);
-  border-radius: 10px;
+  border-radius: 8px;
   margin-right: 10px;
   margin-bottom: 15px;
 }
+.synth__effect .reverb-control:hover,
+.synth__effect .tremolo-control:hover,
+.synth__effect .distortion-control:hover,
+.synth__effect .chorus-control:hover,
+.synth__effect .delay-control:hover {
+  background-color: rgb(141, 141, 141);
+}
 .synth__effect .reverb-control h2,
 .synth__effect .tremolo-control h2,
-.synth__effect .chorus-control h2 {
+.synth__effect .distortion-control h2,
+.synth__effect .chorus-control h2,
+.synth__effect .delay-control h2 {
   text-align: center;
   font-size: 25px;
   margin-bottom: 10px;
 }
+.synth__effect .reverb-control button,
+.synth__effect .tremolo-control button,
+.synth__effect .distortion-control button,
+.synth__effect .chorus-control button,
+.synth__effect .delay-control button {
+  border: none;
+  background-color: rgb(171, 209, 32);
+  border-radius: 3px;
+}
+.synth__effect .reverb-control button:hover,
+.synth__effect .tremolo-control button:hover,
+.synth__effect .distortion-control button:hover,
+.synth__effect .chorus-control button:hover,
+.synth__effect .delay-control button:hover {
+  background-color: rgb(186, 231, 24);
+  box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+}
 .synth__effect .reverb-control div,
 .synth__effect .tremolo-control div,
-.synth__effect .chorus-control div {
+.synth__effect .distortion-control div,
+.synth__effect .chorus-control div,
+.synth__effect .delay-control div {
   display: flex;
   justify-content: space-between;
 }
-.synth__effect .reverb-control div input,
 .synth__effect .reverb-control div select,
-.synth__effect .tremolo-control div input,
 .synth__effect .tremolo-control div select,
-.synth__effect .chorus-control div input,
-.synth__effect .chorus-control div select {
+.synth__effect .distortion-control div select,
+.synth__effect .chorus-control div select,
+.synth__effect .delay-control div select {
+  border: none;
+  border-radius: 3px;
   width: 50px;
 }
 
@@ -311,29 +347,25 @@ input[type=range] {
        appearance: none;
   background: transparent;
   cursor: pointer;
-  width: 40px;
+  width: 50px;
 }
-
 input[type=range]::-webkit-slider-runnable-track {
   background-color: rgb(171, 209, 32);
   border-radius: 0.5rem;
   height: 8px;
 }
-
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   margin-top: -3px;
-  background-color: #808080;
+  background-color: #6b6b6b;
   border-radius: 0px;
   height: 14px;
   width: 6px;
 }
-
 input[type=range]:hover::-webkit-slider-runnable-track {
   background-color: rgb(121, 145, 38);
 }
-
 input[type=range]:hover::-webkit-slider-thumb {
   background-color: #c7c7c7;
 }/*# sourceMappingURL=app.css.map */

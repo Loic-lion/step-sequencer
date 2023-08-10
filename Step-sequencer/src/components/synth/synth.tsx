@@ -4,6 +4,8 @@ import ReverbControl from "../effects/reverb";
 import TremoloControl from "../effects/tremolo";
 import ChorusControl from "../effects/chorus";
 import SynthOptions from "./option-synth";
+import DistortionControl from "../effects/distortion";
+import FeedbackDelayControl from "../effects/delay";
 
 const Synthetizer: React.FC = () => {
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
@@ -104,9 +106,9 @@ const Synthetizer: React.FC = () => {
         <ReverbControl synth={synth} />
         <TremoloControl synth={synth} />
         <ChorusControl synth={synth} />
+        <DistortionControl synth={synth} />
+        <FeedbackDelayControl synth={synth} />
       </div>
-      <hr />
-      <div>modulation</div>
       <hr />
       <div>clavier</div>
     </section>

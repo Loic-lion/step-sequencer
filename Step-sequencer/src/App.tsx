@@ -1,6 +1,6 @@
 import React from "react";
 import * as Tone from "tone";
-import "./app.css";
+import "./css/app.css";
 import ButtonPlayStop from "./components/step-sequencer/ButtonPlayStop";
 import { StepIndicator } from "./components/step-sequencer/StepIndicator";
 import SampleButton from "./components/step-sequencer/SampleButton";
