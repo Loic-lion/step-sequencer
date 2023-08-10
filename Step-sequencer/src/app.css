@@ -136,6 +136,9 @@ table {
   border: solid 5px rgb(162, 162, 162);
 }
 .container__player__onoff {
+  text-align: center;
+  height: 30px;
+  width: 30px;
   border: none;
   background-color: rgb(143, 192, 143);
   border-radius: 3px;
@@ -182,6 +185,40 @@ table {
 }
 .container__flex__list__row__cell__content.red-bg {
   background-color: rgb(100, 150, 107);
+}
+
+.step-indicator {
+  display: flex;
+  margin-top: 10px;
+  margin-left: 99px;
+}
+.step-indicator__step {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #92c76e;
+  margin-right: 13px;
+}
+
+.active-step {
+  background-color: rgb(171, 209, 32);
+}
+
+.sample-button {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  width: 90px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+.sample-button:hover {
+  background-color: #9c4545;
+}
+.sample-button:focus {
+  outline: none;
 }
 
 .synth {

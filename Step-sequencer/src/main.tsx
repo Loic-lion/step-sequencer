@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           name: "Rim click",
         },
       ]}
-      numOfSteps={16}
+      numOfSteps={32}
     />
   </React.StrictMode>
 );

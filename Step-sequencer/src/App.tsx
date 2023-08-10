@@ -1,29 +1,109 @@
 import React from "react";
 import * as Tone from "tone";
 import "./app.css";
+import ButtonPlayStop from "./components/step-sequencer/ButtonPlayStop";
+import { StepIndicator } from "./components/step-sequencer/StepIndicator";
+import SampleButton from "./components/step-sequencer/SampleButton";
+import AudioFileUploader from "./components/step-sequencer/AudioFileUploader";
 import Synthetizer from "./components/synth/synth";
 
+const NOTE = "C2";
+
 type Props = {
-  samples: { url: string; name: string }[];
   numOfSteps: number;
 };
-export default function App({ samples, numOfSteps }: Props) {
+
+type Sample = {
+  url: string;
+  name: string;
+};
+
+type Track = {
+  id: number;
+  sampler: Tone.Sampler;
+};
+
+export default function App({ numOfSteps }: Props) {
+  const initialSamples: Sample[] = [
+    {
+      url: "/Hit.wav",
+      name: "Hit",
+    },
+    {
+      url: "/Kick.wav",
+      name: "Kick",
+    },
+    {
+      url: "/Snare.wav",
+      name: "Snare",
+    },
+    {
+      url: "/Rim-click.wav",
+      name: "Rim click",
+    },
+  ];
+
+  const [samples, setSamples] = React.useState<Sample[]>(initialSamples);
   const trackIds = [...Array(samples.length).keys()] as const;
   const stepIds = [...Array(numOfSteps).keys()] as const;
+
   const [isPlaying, setIsPlaying] = React.useState(false);
+  const [currentStep, setCurrentStep] = React.useState<number>(0);
+
+  const tracksRef = React.useRef<Track[]>([]);
+  const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
+  const seqRef = React.useRef<Tone.Sequence | null>(null);
+
+  React.useEffect(() => {
+    tracksRef.current = samples.map((sample, i) => ({
+      id: i,
+      sampler: new Tone.Sampler({
+        urls: {
+          [NOTE]: sample.url,
+        },
+      }).toDestination(),
+    }));
+    seqRef.current = new Tone.Sequence(
+      (time, step) => {
+        setCurrentStep(step);
+        tracksRef.current.forEach((trk) => {
+          if (stepRef.current[trk.id]?.[step]?.checked) {
+            trk.sampler.triggerAttack(NOTE, time);
+          }
+        });
+      },
+      [...stepIds],
+      "16n"
+    ).start(0);
+    return () => {
+      seqRef.current?.dispose();
+      tracksRef.current.forEach((trk) => trk.sampler.dispose());
+    };
+  }, [samples, numOfSteps]);
+
+  const handleFileUpload = (file: File) => {
+    const name = prompt("Please enter the name for the sample:");
+    if (!name) return;
+    const newSample = {
+      url: URL.createObjectURL(file),
+      name: name,
+    };
+    setSamples((prevSamples) => [...prevSamples, newSample]);
+  };
 
   return (
     <>
       <section className="container">
         <div className="container__player">
-          <button className="container__player__onoff">
-            {isPlaying ? "■" : "▶"}
-          </button>
+          <ButtonPlayStop setIsPlaying={setIsPlaying} />
         </div>
         <div className="container__flex">
           <div className="container__flex__list">
             {trackIds.map((trackId) => (
               <div key={trackId} className="container__flex__list__row">
+                <SampleButton
+                  sampleName={samples[trackId]?.name || "No sample"}
+                />
                 {stepIds.map((stepId) => {
                   const id = trackId + "-" + stepId;
                   const groupIndex = Math.floor(stepId / 4);
@@ -38,6 +118,13 @@ export default function App({ samples, numOfSteps }: Props) {
                         id={id}
                         type="checkbox"
                         className="container__flex__list__row__cell__input"
+                        ref={(elm) => {
+                          if (!elm) return;
+                          if (!stepRef.current[trackId]) {
+                            stepRef.current[trackId] = [];
+                          }
+                          stepRef.current[trackId][stepId] = elm;
+                        }}
                       />
                       <div
                         className={`container__flex__list__row__cell__content ${bgColorClass}`}
@@ -47,8 +134,12 @@ export default function App({ samples, numOfSteps }: Props) {
                 })}
               </div>
             ))}
+            <div className="container__flex__list__row">
+              <AudioFileUploader onFileUpload={handleFileUpload} />
+            </div>
           </div>
         </div>
+        <StepIndicator currentStep={currentStep} numOfSteps={numOfSteps} />
       </section>
       <div className="App">
         <Synthetizer />
