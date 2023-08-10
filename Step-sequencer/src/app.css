@@ -264,7 +264,6 @@ table {
 .synth__head__options div select,
 .synth__head__options div input {
   border: none;
-  background-color: rgb(255, 255, 255);
   border-radius: 3px;
   width: 50px;
 }
@@ -306,7 +305,35 @@ table {
   width: 50px;
 }
 
+input[type=range] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 40px;
+}
+
 input[type=range]::-webkit-slider-runnable-track {
+  background-color: rgb(171, 209, 32);
+  border-radius: 0.5rem;
   height: 8px;
-  background: #2fad10;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -3px;
+  background-color: #808080;
+  border-radius: 0px;
+  height: 14px;
+  width: 6px;
+}
+
+input[type=range]:hover::-webkit-slider-runnable-track {
+  background-color: rgb(121, 145, 38);
+}
+
+input[type=range]:hover::-webkit-slider-thumb {
+  background-color: #c7c7c7;
 }/*# sourceMappingURL=app.css.map */
