@@ -1,4 +1,4 @@
-# Step-Sequencer
+# Step-Sequencer (WIP)
 ## Projet solo
 __Création d'un DAW avec React, Tone et du Scss.__
 * ? jours de travail (02/08/23 au ?)
