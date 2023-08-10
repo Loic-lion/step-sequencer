@@ -52,8 +52,10 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       <div>
         <label>Detune</label>
         <input
-          type="number"
+          type="range"
           name="detune"
+          min="-100"
+          max="100"
           value={synthOptions.detune}
           onChange={handleSynthOptionChange}
         />
@@ -61,8 +63,10 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       <div>
         <label>Volume</label>
         <input
-          type="number"
+          type="range"
           name="volume"
+          min="-50"
+          max="0"
           value={synthOptions.volume}
           onChange={handleSynthOptionChange}
         />
@@ -70,8 +74,11 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       <div>
         <label>Portamento</label>
         <input
-          type="number"
+          type="range"
           name="portamento"
+          min="0"
+          max="1"
+          step="0.01"
           value={synthOptions.portamento}
           onChange={handleSynthOptionChange}
         />
@@ -92,8 +99,11 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       <div>
         <label>Envelope Attack</label>
         <input
-          type="number"
+          type="range"
           name="envelope.attack"
+          min="0"
+          max="1"
+          step="0.01"
           value={synthOptions.envelope.attack}
           onChange={handleSynthOptionChange}
         />
@@ -101,8 +111,11 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       <div>
         <label>Envelope Decay</label>
         <input
-          type="number"
+          type="range"
           name="envelope.decay"
+          min="0"
+          max="1"
+          step="0.01"
           value={synthOptions.envelope.decay}
           onChange={handleSynthOptionChange}
         />
@@ -110,8 +123,11 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       <div>
         <label>Envelope Sustain</label>
         <input
-          type="number"
+          type="range"
           name="envelope.sustain"
+          min="0"
+          max="1"
+          step="0.01"
           value={synthOptions.envelope.sustain}
           onChange={handleSynthOptionChange}
         />
@@ -119,8 +135,11 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       <div>
         <label>Envelope Release</label>
         <input
-          type="number"
+          type="range"
           name="envelope.release"
+          min="0"
+          max="1"
+          step="0.01"
           value={synthOptions.envelope.release}
           onChange={handleSynthOptionChange}
         />

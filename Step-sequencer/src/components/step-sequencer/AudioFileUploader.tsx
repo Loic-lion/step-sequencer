@@ -4,7 +4,9 @@ type AudioFileUploaderProps = {
   onFileUpload: (file: File) => void;
 };
 
-const AudioFileUploader: React.FC<AudioFileUploaderProps> = ({ onFileUpload }) => {
+const AudioFileUploader: React.FC<AudioFileUploaderProps> = ({
+  onFileUpload,
+}) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     if (file) {
@@ -14,7 +16,12 @@ const AudioFileUploader: React.FC<AudioFileUploaderProps> = ({ onFileUpload }) =
 
   return (
     <div>
-      <input type="file" accept="audio/*" onChange={handleFileChange} />
+      <input
+        type="file"
+        accept="audio/*"
+        onChange={handleFileChange}
+        className="input__upload"
+      />
     </div>
   );
 };

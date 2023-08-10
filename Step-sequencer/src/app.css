@@ -135,17 +135,24 @@ table {
   border-radius: 10px;
   border: solid 5px rgb(162, 162, 162);
 }
+.container__player {
+  display: flex;
+}
+.container__player input {
+  margin-top: 5px;
+}
 .container__player__onoff {
   text-align: center;
   height: 30px;
   width: 30px;
   border: none;
-  background-color: rgb(143, 192, 143);
+  background-color: rgb(171, 209, 32);
   border-radius: 3px;
-  margin-bottom: 15px;
+  margin: 0px 15px 15px 0px;
 }
 .container__player__onoff:hover {
-  background-color: rgb(98, 146, 98);
+  background-color: rgb(186, 231, 24);
+  box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
 }
 .container__flex__list {
   display: flex;
@@ -212,7 +219,6 @@ table {
   width: 90px;
   height: 40px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
 }
 .sample-button:hover {
   background-color: #9c4545;
@@ -222,24 +228,22 @@ table {
 }
 
 .synth {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   min-height: 200px;
-  width: 500px;
-  background-color: rgb(100, 23, 23);
+  width: 949px;
+  background-color: rgb(49, 49, 49);
   border-radius: 10px;
-  border: solid 5px rgb(109, 85, 85);
+  border: solid 5px rgb(162, 162, 162);
 }
 .synth hr {
   width: 90%;
 }
 .synth__head {
   color: white;
+  margin-left: 20px;
 }
 .synth__head h1 {
   font-size: 30px;
-  margin: 10px 0px 10px 0px;
+  margin: 20px 0px 10px 0px;
   color: white;
 }
 .synth__head__options {
@@ -262,35 +266,47 @@ table {
   border: none;
   background-color: rgb(255, 255, 255);
   border-radius: 3px;
-}
-.synth__head__options div input {
-  width: 35px;
+  width: 50px;
 }
 .synth__effect {
   display: flex;
-  margin: 10px;
-  width: 450px;
-  overflow: hidden;
-  overflow-x: scroll;
+  margin: 20px;
 }
 .synth__effect .reverb-control,
-.synth__effect .tremolo-control {
+.synth__effect .tremolo-control,
+.synth__effect .chorus-control {
   height: -moz-fit-content;
   height: fit-content;
   min-width: 150px;
   padding: 10px;
-  background-color: rgb(167, 36, 36);
+  background-color: rgb(162, 162, 162);
   border-radius: 10px;
   margin-right: 10px;
   margin-bottom: 15px;
 }
 .synth__effect .reverb-control h2,
-.synth__effect .tremolo-control h2 {
+.synth__effect .tremolo-control h2,
+.synth__effect .chorus-control h2 {
   text-align: center;
   font-size: 25px;
   margin-bottom: 10px;
 }
-.synth__effect .reverb-control input,
-.synth__effect .tremolo-control input {
+.synth__effect .reverb-control div,
+.synth__effect .tremolo-control div,
+.synth__effect .chorus-control div {
+  display: flex;
+  justify-content: space-between;
+}
+.synth__effect .reverb-control div input,
+.synth__effect .reverb-control div select,
+.synth__effect .tremolo-control div input,
+.synth__effect .tremolo-control div select,
+.synth__effect .chorus-control div input,
+.synth__effect .chorus-control div select {
   width: 50px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #2fad10;
 }/*# sourceMappingURL=app.css.map */

@@ -96,6 +96,7 @@ export default function App({ numOfSteps }: Props) {
       <section className="container">
         <div className="container__player">
           <ButtonPlayStop setIsPlaying={setIsPlaying} />
+          <AudioFileUploader onFileUpload={handleFileUpload} />
         </div>
         <div className="container__flex">
           <div className="container__flex__list">
@@ -134,12 +135,9 @@ export default function App({ numOfSteps }: Props) {
                 })}
               </div>
             ))}
-            <div className="container__flex__list__row">
-              <AudioFileUploader onFileUpload={handleFileUpload} />
-            </div>
+            <StepIndicator currentStep={currentStep} numOfSteps={numOfSteps} />
           </div>
         </div>
-        <StepIndicator currentStep={currentStep} numOfSteps={numOfSteps} />
       </section>
       <div className="App">
         <Synthetizer />
