@@ -152,12 +152,14 @@ body {
   &__effect {
     display: flex;
     margin: 20px;
-    
+    overflow-x: scroll;
+    overflow-y: hidden;
     .reverb-control,
     .tremolo-control,
     .distortion-control,
     .chorus-control,
-    .delay-control {
+    .delay-control,
+    .phaser-control {
       height: fit-content;
       min-width: 150px;
       min-height: 132px;

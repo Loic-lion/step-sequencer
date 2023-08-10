@@ -6,6 +6,7 @@ import ChorusControl from "../effects/chorus";
 import SynthOptions from "./option-synth";
 import DistortionControl from "../effects/distortion";
 import FeedbackDelayControl from "../effects/delay";
+import PhaserControl from "../effects/phaser";
 
 const Synthetizer: React.FC = () => {
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
@@ -108,6 +109,7 @@ const Synthetizer: React.FC = () => {
         <ChorusControl synth={synth} />
         <DistortionControl synth={synth} />
         <FeedbackDelayControl synth={synth} />
+        <PhaserControl synth={synth} />
       </div>
       <hr />
       <div>clavier</div>
