@@ -8,7 +8,7 @@ interface SynthOptionsProps {
 const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
   const [synthOptions, setSynthOptions] = useState({
     detune: 0,
-    volume: 0,
+    volume: -20,
     portamento: 0,
     oscillator: {
       type: "sine" as Tone.ToneOscillatorType,

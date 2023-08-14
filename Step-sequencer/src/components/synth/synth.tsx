@@ -7,6 +7,7 @@ import SynthOptions from "./option-synth";
 import DistortionControl from "../effects/distortion";
 import FeedbackDelayControl from "../effects/delay";
 import PhaserControl from "../effects/phaser";
+import Piano from "./piano";
 
 const Synthetizer: React.FC = () => {
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
@@ -111,8 +112,9 @@ const Synthetizer: React.FC = () => {
         <FeedbackDelayControl synth={synth} />
         <PhaserControl synth={synth} />
       </div>
-      <hr />
-      <div>clavier</div>
+      <div>
+        <Piano synth={synth} />
+      </div>
     </section>
   );
 };
