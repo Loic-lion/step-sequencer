@@ -123,7 +123,7 @@ const Piano: React.FC<PianoProps> = ({ synth }) => {
   };
 
   return (
-    <div className="piano">
+    <>
       {pianoKeys.map((note, index) => (
         <div
           key={index}
@@ -133,7 +133,7 @@ const Piano: React.FC<PianoProps> = ({ synth }) => {
           onMouseDown={() => handleNoteMouseDown(note)}
         ></div>
       ))}
-    </div>
+    </>
   );
 };
 

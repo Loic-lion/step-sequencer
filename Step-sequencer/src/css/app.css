@@ -185,7 +185,7 @@ body {
   position: absolute;
 }
 .container__flex__list__row__cell__input:checked + .container__flex__list__row__cell__content {
-  background-color: rgb(228, 22, 22);
+  background-color: rgb(171, 209, 32);
 }
 .container__flex__list__row__cell__content {
   width: 20px;
@@ -250,6 +250,16 @@ body {
   font-size: 30px;
   margin: 20px 0px 10px 0px;
   color: white;
+}
+.synth__head__show__effects {
+  border: none;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background-color: rgb(171, 209, 32);
+}
+.synth__head__show__effects:hover {
+  background-color: rgb(186, 231, 24);
+  box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
 }
 .synth__head__options {
   width: 400px;
@@ -349,6 +359,9 @@ body {
   border-radius: 3px;
   width: 50px;
 }
+.synth__sequencer__track {
+  display: flex;
+}
 
 input[type=range] {
   -webkit-appearance: none;
@@ -379,12 +392,13 @@ input[type=range]:hover::-webkit-slider-thumb {
   background-color: #c7c7c7;
 }
 
-.piano {
+.synth__piano {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   height: 100px;
   background-color: #f0f0f0;
+  overflow: hidden;
 }
 
 .piano-key {

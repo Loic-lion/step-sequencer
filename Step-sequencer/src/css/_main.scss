@@ -54,7 +54,7 @@ body {
           @include invisibleInput();
 
           &:checked + #{$cell}__content {
-            background-color: rgb(228, 22, 22);
+            background-color: rgb(171, 209, 32);
           }
         }
         &__content {
@@ -125,6 +125,16 @@ body {
       font-size: 30px;
       margin: 20px 0px 10px 0px;
       color: white;
+    }
+    &__show__effects {
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      background-color: rgb(171, 209, 32);
+      &:hover {
+        background-color: rgb(186, 231, 24);
+        box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+      }
     }
     &__options {
       width: 400px;
@@ -197,6 +207,11 @@ body {
       }
     }
   }
+  &__sequencer {
+    &__track {
+      display: flex;
+    }
+  }
 }
 
 input[type="range"] {
@@ -228,12 +243,13 @@ input[type="range"] {
 }
 
 ////////////////////
-.piano {
+.synth__piano {
   display: flex;
   align-items: flex-end;
   justify-content: center;
   height: 100px;
   background-color: #f0f0f0;
+  overflow: hidden;
 }
 
 .piano-key {

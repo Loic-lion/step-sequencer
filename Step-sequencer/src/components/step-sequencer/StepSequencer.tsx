@@ -1,11 +1,10 @@
 import React from "react";
 import * as Tone from "tone";
-import "./css/app.css";
-import ButtonPlayStop from "./components/step-sequencer/ButtonPlayStop";
-import { StepIndicator } from "./components/step-sequencer/StepIndicator";
-import SampleButton from "./components/step-sequencer/SampleButton";
-import AudioFileUploader from "./components/step-sequencer/AudioFileUploader";
-import Synthetizer from "./components/synth/synth";
+
+import ButtonPlayStop from "./ButtonPlayStop";
+import { StepIndicator } from "./StepIndicator";
+import SampleButton from "./SampleButton";
+import AudioFileUploader from "./AudioFileUploader";
 
 const NOTE = "C4";
 
@@ -139,9 +138,6 @@ export default function App({ numOfSteps }: Props) {
           </div>
         </div>
       </section>
-      <div className="App">
-        <Synthetizer />
-      </div>
     </>
   );
 }

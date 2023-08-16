@@ -8,12 +8,17 @@ import DistortionControl from "../effects/distortion";
 import FeedbackDelayControl from "../effects/delay";
 import PhaserControl from "../effects/phaser";
 import Piano from "./piano";
+import SynthSequencer from "./sequencer";
 
-const Synthetizer: React.FC = () => {
+export default function Synthetizer() {
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
   const [activeNotes, setActiveNotes] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const [divSizes, setDivSizes] = useState({
+    synthEffectHeight: "200px",
+    pianoHeight: "100px",
+  });
 
   useEffect(() => {
     const newSynth = new Tone.PolySynth().toDestination();
@@ -86,7 +91,6 @@ const Synthetizer: React.FC = () => {
       }
     }
   };
-
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
@@ -97,14 +101,29 @@ const Synthetizer: React.FC = () => {
     };
   }, [synth, activeNotes]);
 
+  const toggleDivSizes = () => {
+    setDivSizes((prevSizes) => ({
+      synthEffectHeight:
+        prevSizes.synthEffectHeight === "200px" ? "0px" : "200px",
+      pianoHeight: prevSizes.pianoHeight === "100px" ? "0px" : "100px",
+    }));
+  };
+
   return (
     <section className="synth">
       <div className="synth__head">
         <h1>PolySynth</h1>
         <SynthOptions synth={synth} />
+        <button className="synth__head__show__effects" onClick={toggleDivSizes}>
+          Afficher/Cacher Sequencer
+        </button>
       </div>
+
       <hr />
-      <div className="synth__effect">
+      <div
+        className="synth__effect"
+        style={{ height: divSizes.synthEffectHeight }}
+      >
         <ReverbControl synth={synth} />
         <TremoloControl synth={synth} />
         <ChorusControl synth={synth} />
@@ -112,11 +131,12 @@ const Synthetizer: React.FC = () => {
         <FeedbackDelayControl synth={synth} />
         <PhaserControl synth={synth} />
       </div>
-      <div>
+      <div className="synth__piano" style={{ height: divSizes.pianoHeight }}>
         <Piano synth={synth} />
+      </div>
+      <div className="synth__sequencer">
+        <SynthSequencer synth={synth} numOfSteps={32} />
       </div>
     </section>
   );
-};
-
-export default Synthetizer;
+}
