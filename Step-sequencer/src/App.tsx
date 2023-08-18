@@ -49,7 +49,7 @@ export default function App({ numOfSteps }: Props) {
 
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentStep, setCurrentStep] = React.useState<number>(0);
-
+  console.log(isPlaying);
   const tracksRef = React.useRef<Track[]>([]);
   const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
   const seqRef = React.useRef<Tone.Sequence | null>(null);

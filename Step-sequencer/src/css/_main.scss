@@ -129,10 +129,14 @@ body {
     &__show__effects {
       border: none;
       border-radius: 3px;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       background-color: rgb(171, 209, 32);
       &:hover {
         background-color: rgb(186, 231, 24);
+        box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+      }
+      &:active {
+        background-color: rgb(134, 158, 47);
         box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
       }
     }
@@ -195,6 +199,10 @@ body {
           background-color: rgb(186, 231, 24);
           box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
         }
+        &:active {
+          background-color: rgb(134, 158, 47);
+          box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+        }
       }
       div {
         display: flex;
@@ -208,8 +216,69 @@ body {
     }
   }
   &__sequencer {
-    &__track {
+    &__selector {
+      margin: 0px 0px 20px 20px;
+      button {
+        background-color: rgb(171, 209, 32);
+        border-style: none;
+        cursor: pointer;
+        margin-right: 5px;
+        border-radius: 3px;
+
+        &:hover {
+          background-color: rgb(186, 231, 24);
+          box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+        }
+        &:active {
+          background-color: rgb(134, 158, 47);
+          box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+        }
+      }
+    }
+    &__container {
       display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      margin-left: 20px;
+      &__track {
+        display: flex;
+        column-gap: 5px;
+        &:last-child {
+          margin-bottom: 20px;
+        }
+        &__note {
+          text-align: center;
+          background-color: #ffffff;
+          border: 1px solid #ccc;
+          width: 90px;
+          border-radius: 0px 3px 3px 0px;
+        }
+        &__step {
+          $cell: &;
+          cursor: pointer;
+          input {
+            @include invisibleInput();
+
+            &:checked + #{$cell}__content {
+              background-color: rgb(171, 209, 32);
+            }
+          }
+          &__content {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            background-color: rgb(172, 172, 172);
+
+            &.gray-bg {
+              background-color: rgb(172, 172, 172);
+            }
+
+            &.red-bg {
+              background-color: rgb(100, 150, 107);
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -276,8 +345,4 @@ input[type="range"] {
   margin: 40px -10px;
   background-color: black;
   z-index: 1;
-}
-
-.active {
-  background-color: #ffcc00;
 }

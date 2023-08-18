@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as Tone from "tone";
 
+
 interface DistortionControlProps {
   synth: Tone.PolySynth | null;
 }
@@ -9,7 +10,7 @@ const DistortionControl: React.FC<DistortionControlProps> = ({ synth }) => {
   const [distortion, setDistortion] = useState<Tone.Distortion | null>(null);
   const [distortionOptions, setDistortionOptions] = useState({
     distortion: 0.4,
-    oversample: "2x",
+    oversample: "2x" as OverSampleType, 
     wet: 0.3,
   });
   const [isDistortionActive, setIsDistortionActive] = useState(true);
@@ -18,9 +19,10 @@ const DistortionControl: React.FC<DistortionControlProps> = ({ synth }) => {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
+    
     setDistortionOptions((prevOptions) => ({
       ...prevOptions,
-      [name]: name === "oversample" ? value : parseFloat(value),
+      [name]: name === "oversample" ? (value as OverSampleType) : parseFloat(value),
     }));
   };
 

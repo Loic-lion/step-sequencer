@@ -1,8 +1,12 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import * as Tone from "tone";
 
-const ButtonPlayStop = () => {
-  const [isPlaying, setIsPlaying] = React.useState(false);
+interface ButtonPlayStopProps {
+  setIsPlaying: Dispatch<SetStateAction<boolean>>;
+}
+
+const ButtonPlayStop: React.FC<ButtonPlayStopProps> = ({ setIsPlaying }) => {
+  const [isPlaying, setIsPlayingLocal] = React.useState(false);
 
   const handleStartClick = async () => {
     try {
@@ -11,10 +15,12 @@ const ButtonPlayStop = () => {
       Tone.context.resume();
       if (Tone.Transport.state === "started") {
         Tone.Transport.stop();
-        setIsPlaying(false);
+        setIsPlayingLocal(false);
+        setIsPlaying(false); 
       } else {
         Tone.Transport.start();
-        setIsPlaying(true);
+        setIsPlayingLocal(true);
+        setIsPlaying(true); 
       }
     } catch (error) {
       console.error("Impossible de démarrer l'AudioContext : ", error);

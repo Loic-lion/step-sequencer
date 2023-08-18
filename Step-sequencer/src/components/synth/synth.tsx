@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as Tone from "tone";
 import ReverbControl from "../effects/reverb";
 import TremoloControl from "../effects/tremolo";
@@ -135,7 +135,7 @@ export default function Synthetizer() {
         <Piano synth={synth} />
       </div>
       <div className="synth__sequencer">
-        <SynthSequencer synth={synth} numOfSteps={32} />
+        <SynthSequencer synth={synth} />
       </div>
     </section>
   );

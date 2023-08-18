@@ -1,17 +1,35 @@
 import React, { useState } from "react";
 import * as Tone from "tone";
 
+type ValidOscillatorType = "sine" | "square" | "triangle" | "sawtooth";
+
+interface SynthOptions {
+  detune: number;
+  volume: number;
+  portamento: number;
+  oscillator: {
+    type: ValidOscillatorType;
+    [key: string]: any;
+  };
+  envelope: {
+    attack: number;
+    decay: number;
+    sustain: number;
+    release: number;
+  };
+}
+
 interface SynthOptionsProps {
   synth: Tone.PolySynth | null;
 }
 
 const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
-  const [synthOptions, setSynthOptions] = useState({
+  const [synthOptions, setSynthOptions] = useState<SynthOptions>({
     detune: 0,
     volume: -20,
     portamento: 0,
     oscillator: {
-      type: "sine" as Tone.ToneOscillatorType,
+      type: "sine",
     },
     envelope: {
       attack: 0.1,
@@ -26,24 +44,28 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
   ) => {
     const { name, value } = event.target;
 
-    if (name.includes(".")) {
-      const [parentKey, childKey] = name.split(".");
-      setSynthOptions((prevOptions) => ({
-        ...prevOptions,
-        [parentKey]: {
-          ...prevOptions[parentKey],
-          [childKey]: parseFloat(value) || value,
+    let updatedOptions: SynthOptions;
+
+    if (name === "oscillator.type") {
+      updatedOptions = {
+        ...synthOptions,
+        oscillator: {
+          ...synthOptions.oscillator,
+          type: value as ValidOscillatorType,
         },
-      }));
+      };
     } else {
-      setSynthOptions((prevOptions) => ({
-        ...prevOptions,
-        [name]: parseFloat(value) || value,
-      }));
+      const updatedProp: keyof SynthOptions = name as keyof SynthOptions;
+      updatedOptions = {
+        ...synthOptions,
+        [updatedProp]: parseFloat(value) || value,
+      };
     }
 
+    setSynthOptions(updatedOptions);
+
     if (synth) {
-      synth.set(synthOptions);
+      synth.set(updatedOptions);
     }
   };
 
