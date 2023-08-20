@@ -2,12 +2,13 @@ import React from "react";
 import * as Tone from "tone";
 import "./css/app.css";
 import ButtonPlayStop from "./components/step-sequencer/ButtonPlayStop";
-import { StepIndicator } from "./components/step-sequencer/StepIndicator";
 import SampleButton from "./components/step-sequencer/SampleButton";
 import AudioFileUploader from "./components/step-sequencer/AudioFileUploader";
 import Synthetizer from "./components/synth/synth";
 
 const NOTE = "C4";
+
+
 
 type Props = {
   numOfSteps: number;
@@ -81,7 +82,7 @@ export default function App({ numOfSteps }: Props) {
     };
   }, [samples, numOfSteps]);
 
-  const handleFileUpload = (file: File) => {
+  function handleFileUpload(file: File) {
     const name = prompt("Please enter the name for the sample:");
     if (!name) return;
     const newSample = {
@@ -89,14 +90,14 @@ export default function App({ numOfSteps }: Props) {
       name: name,
     };
     setSamples((prevSamples) => [...prevSamples, newSample]);
-  };
+  }
 
   return (
     <>
       <section className="container">
         <div className="container__player">
           <ButtonPlayStop setIsPlaying={setIsPlaying} />
-          <AudioFileUploader onFileUpload={handleFileUpload} />
+          <AudioFileUploader onFileUpload={(file) => handleFileUpload(file)} />
         </div>
         <div className="container__flex">
           <div className="container__flex__list">
@@ -135,7 +136,6 @@ export default function App({ numOfSteps }: Props) {
                 })}
               </div>
             ))}
-            <StepIndicator currentStep={currentStep} numOfSteps={numOfSteps} />
           </div>
         </div>
       </section>
