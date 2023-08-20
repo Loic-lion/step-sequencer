@@ -64,7 +64,7 @@ export default function Synthetizer() {
     ";": "G6",
   };
 
-  const handleKeyDown = (event: KeyboardEvent) => {
+  function handleKeyDown(event: KeyboardEvent) {
     const key = event.key;
     if (keyNoteMap.hasOwnProperty(key)) {
       const note = keyNoteMap[key];
@@ -76,9 +76,9 @@ export default function Synthetizer() {
         synth?.triggerAttack(note);
       }
     }
-  };
-
-  const handleKeyUp = (event: KeyboardEvent) => {
+  }
+  
+  function handleKeyUp(event: KeyboardEvent) {
     const key = event.key;
     if (keyNoteMap.hasOwnProperty(key)) {
       const note = keyNoteMap[key];
@@ -101,13 +101,12 @@ export default function Synthetizer() {
     };
   }, [synth, activeNotes]);
 
-  const toggleDivSizes = () => {
+  function toggleDivSizes() {
     setDivSizes((prevSizes) => ({
-      synthEffectHeight:
-        prevSizes.synthEffectHeight === "200px" ? "0px" : "200px",
+      synthEffectHeight: prevSizes.synthEffectHeight === "200px" ? "0px" : "200px",
       pianoHeight: prevSizes.pianoHeight === "100px" ? "0px" : "100px",
     }));
-  };
+  }
 
   return (
     <section className="synth">
