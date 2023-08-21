@@ -254,7 +254,7 @@ body {
 .synth__head__show__effects {
   border: none;
   border-radius: 3px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   background-color: rgb(171, 209, 32);
 }
 .synth__head__show__effects:hover {
@@ -287,7 +287,7 @@ body {
 }
 .synth__effect {
   display: flex;
-  margin: 20px;
+  margin: 20px 20px 0px 20px;
   overflow-x: scroll;
   overflow-y: hidden;
 }
@@ -372,8 +372,16 @@ body {
   border-radius: 3px;
   width: 50px;
 }
+.synth__sequencer {
+  overflow: hidden;
+  margin-bottom: 20px;
+}
 .synth__sequencer__selector {
-  margin: 0px 0px 20px 20px;
+  margin: 0px 0px 20px 40px;
+}
+.synth__sequencer__selector__octave {
+  color: white;
+  margin-right: 20px;
 }
 .synth__sequencer__selector button {
   background-color: rgb(171, 209, 32);
@@ -394,15 +402,20 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 5px;
-  margin-left: 20px;
+  margin: 0px 0px 20px 20px;
+  overflow-y: scroll;
+  height: 300px;
 }
 .synth__sequencer__container__track {
   display: flex;
   -moz-column-gap: 5px;
        column-gap: 5px;
 }
+.synth__sequencer__container__track:first-child {
+  margin-top: 5px;
+}
 .synth__sequencer__container__track:last-child {
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 }
 .synth__sequencer__container__track__note {
   text-align: center;
@@ -428,6 +441,9 @@ body {
 }
 .synth__sequencer__container__track__step input:checked + .synth__sequencer__container__track__step__content {
   background-color: rgb(171, 209, 32);
+}
+.synth__sequencer__container__track__step select {
+  width: 20px;
 }
 .synth__sequencer__container__track__step__content {
   width: 20px;
@@ -504,4 +520,10 @@ input[type=range]:hover::-webkit-slider-thumb {
   margin: 40px -10px;
   background-color: black;
   z-index: 1;
+}
+
+.active {
+  z-index: 2;
+  box-shadow: 0 0 0 2px rgb(204, 255, 20);
+  border-radius: 5px;
 }/*# sourceMappingURL=app.css.map */

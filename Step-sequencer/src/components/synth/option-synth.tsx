@@ -3,6 +3,13 @@ import * as Tone from "tone";
 
 type ValidOscillatorType = "sine" | "square" | "triangle" | "sawtooth";
 
+interface EnvelopeOptions {
+  attack: number;
+  decay: number;
+  sustain: number;
+  release: number;
+}
+
 interface SynthOptions {
   detune: number;
   volume: number;
@@ -11,12 +18,7 @@ interface SynthOptions {
     type: ValidOscillatorType;
     [key: string]: any;
   };
-  envelope: {
-    attack: number;
-    decay: number;
-    sustain: number;
-    release: number;
-  };
+  envelope: EnvelopeOptions;
 }
 
 interface SynthOptionsProps {
@@ -44,28 +46,53 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
   ) => {
     const { name, value } = event.target;
 
-    let updatedOptions: SynthOptions;
-
-    if (name === "oscillator.type") {
-      updatedOptions = {
-        ...synthOptions,
-        oscillator: {
-          ...synthOptions.oscillator,
-          type: value as ValidOscillatorType,
-        },
-      };
+    if (name.startsWith("oscillator.")) {
+      handleOscillatorOptionChange(name, value);
+    } else if (name.startsWith("envelope.")) {
+      handleEnvelopeOptionChange(name, value);
     } else {
-      const updatedProp: keyof SynthOptions = name as keyof SynthOptions;
-      updatedOptions = {
+      const updatedSynthOptions = {
         ...synthOptions,
-        [updatedProp]: parseFloat(value) || value,
+        [name]: parseFloat(value) || value,
       };
-    }
 
-    setSynthOptions(updatedOptions);
+      setSynthOptions(updatedSynthOptions);
+
+      if (synth) {
+        synth.set(updatedSynthOptions);
+      }
+    }
+  };
+
+  const handleOscillatorOptionChange = (name: string, value: string) => {
+    const updatedOscillatorOptions = {
+      ...synthOptions.oscillator,
+      [name.split(".")[1]]: value,
+    };
+
+    setSynthOptions((prevOptions) => ({
+      ...prevOptions,
+      oscillator: updatedOscillatorOptions,
+    }));
 
     if (synth) {
-      synth.set(updatedOptions);
+      synth.set({ oscillator: updatedOscillatorOptions });
+    }
+  };
+
+  const handleEnvelopeOptionChange = (name: string, value: string) => {
+    const updatedEnvelopeOptions = {
+      ...synthOptions.envelope,
+      [name.split(".")[1]]: parseFloat(value) || value,
+    };
+
+    setSynthOptions((prevOptions) => ({
+      ...prevOptions,
+      envelope: updatedEnvelopeOptions,
+    }));
+
+    if (synth) {
+      synth.set({ envelope: updatedEnvelopeOptions });
     }
   };
 

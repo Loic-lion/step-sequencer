@@ -129,7 +129,7 @@ body {
     &__show__effects {
       border: none;
       border-radius: 3px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       background-color: rgb(171, 209, 32);
       &:hover {
         background-color: rgb(186, 231, 24);
@@ -165,7 +165,7 @@ body {
 
   &__effect {
     display: flex;
-    margin: 20px;
+    margin: 20px 20px 0px 20px;
     overflow-x: scroll;
     overflow-y: hidden;
     .reverb-control,
@@ -216,8 +216,15 @@ body {
     }
   }
   &__sequencer {
+    overflow: hidden;
+    margin-bottom: 20px;
     &__selector {
-      margin: 0px 0px 20px 20px;
+      margin: 0px 0px 20px 40px;
+
+      &__octave {
+        color: white;
+        margin-right: 20px;
+      }
       button {
         background-color: rgb(171, 209, 32);
         border-style: none;
@@ -239,13 +246,19 @@ body {
       display: flex;
       flex-direction: column;
       row-gap: 5px;
-      margin-left: 20px;
+      margin: 0px 0px 20px 20px;
+      overflow-y: scroll;
+      height: 300px;
       &__track {
         display: flex;
         column-gap: 5px;
-        &:last-child {
-          margin-bottom: 20px;
+        &:first-child {
+          margin-top: 5px;
         }
+        &:last-child {
+          margin-bottom: 60px;
+        }
+
         &__note {
           text-align: center;
           background-color: #ffffff;
@@ -262,6 +275,9 @@ body {
             &:checked + #{$cell}__content {
               background-color: rgb(171, 209, 32);
             }
+          }
+          select {
+            width: 20px;
           }
           &__content {
             width: 20px;
@@ -345,4 +361,9 @@ input[type="range"] {
   margin: 40px -10px;
   background-color: black;
   z-index: 1;
+}
+.active {
+  z-index: 2;
+  box-shadow: 0 0 0 2px rgb(204, 255, 20);
+  border-radius: 5px;
 }

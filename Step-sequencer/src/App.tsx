@@ -8,8 +8,6 @@ import Synthetizer from "./components/synth/synth";
 
 const NOTE = "C4";
 
-
-
 type Props = {
   numOfSteps: number;
 };
@@ -82,7 +80,7 @@ export default function App({ numOfSteps }: Props) {
     };
   }, [samples, numOfSteps]);
 
-  function handleFileUpload(file: File) {
+  const handleFileUpload = (file: File) => {
     const name = prompt("Please enter the name for the sample:");
     if (!name) return;
     const newSample = {
@@ -90,14 +88,14 @@ export default function App({ numOfSteps }: Props) {
       name: name,
     };
     setSamples((prevSamples) => [...prevSamples, newSample]);
-  }
+  };
 
   return (
     <>
       <section className="container">
         <div className="container__player">
           <ButtonPlayStop setIsPlaying={setIsPlaying} />
-          <AudioFileUploader onFileUpload={(file) => handleFileUpload(file)} />
+          <AudioFileUploader onFileUpload={handleFileUpload} />
         </div>
         <div className="container__flex">
           <div className="container__flex__list">
@@ -111,10 +109,14 @@ export default function App({ numOfSteps }: Props) {
                   const groupIndex = Math.floor(stepId / 4);
                   const bgColorClass =
                     groupIndex % 2 === 0 ? "gray-bg" : "red-bg";
+                  const isActive = currentStep === stepId;
+
                   return (
                     <label
                       key={id}
-                      className="container__flex__list__row__cell"
+                      className={`container__flex__list__row__cell ${
+                        isActive ? "active" : ""
+                      }`}
                     >
                       <input
                         id={id}
@@ -129,7 +131,9 @@ export default function App({ numOfSteps }: Props) {
                         }}
                       />
                       <div
-                        className={`container__flex__list__row__cell__content ${bgColorClass}`}
+                        className={`container__flex__list__row__cell__content ${bgColorClass} ${
+                          isActive ? "active" : ""
+                        }`}
                       />
                     </label>
                   );
