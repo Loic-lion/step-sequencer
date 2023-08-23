@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import * as Tone from "tone";
+import VisualEnvelope from "./visual-envelope";
+import VisualFrequencies from "./visual-frenquencies";
+import { Link, BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 type ValidOscillatorType = "sine" | "square" | "triangle" | "sawtooth";
 
@@ -40,7 +43,6 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
       release: 1,
     },
   });
-
   const handleSynthOptionChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -193,6 +195,32 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
           onChange={handleSynthOptionChange}
         />
       </div>
+
+      <Router>
+        <div className="synth__head__options__graph">
+          <nav>
+            <ul className="synth__head__options__graph__navbar">
+              <li>
+                <Link to="/envelope">Envelope</Link>
+              </li>
+              <li>
+                <Link to="/frequencies">Frequencies</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <Routes>
+            <Route
+              path="/envelope"
+              element={<VisualEnvelope envelope={synthOptions.envelope} />}
+            />
+            <Route
+              path="/frequencies"
+              element={<VisualFrequencies synth={synth} />}
+            />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 };

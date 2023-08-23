@@ -10,6 +10,7 @@ import PhaserControl from "../effects/phaser";
 import Piano from "./piano";
 import SynthSequencer from "./sequencer";
 
+
 export default function Synthetizer() {
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
   const [activeNotes, setActiveNotes] = useState<{ [key: string]: boolean }>(
@@ -77,7 +78,7 @@ export default function Synthetizer() {
       }
     }
   }
-  
+
   function handleKeyUp(event: KeyboardEvent) {
     const key = event.key;
     if (keyNoteMap.hasOwnProperty(key)) {
@@ -90,7 +91,7 @@ export default function Synthetizer() {
         synth?.triggerRelease(note);
       }
     }
-  };
+  }
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
@@ -103,7 +104,8 @@ export default function Synthetizer() {
 
   function toggleDivSizes() {
     setDivSizes((prevSizes) => ({
-      synthEffectHeight: prevSizes.synthEffectHeight === "200px" ? "0px" : "200px",
+      synthEffectHeight:
+        prevSizes.synthEffectHeight === "200px" ? "0px" : "200px",
       pianoHeight: prevSizes.pianoHeight === "100px" ? "0px" : "100px",
     }));
   }

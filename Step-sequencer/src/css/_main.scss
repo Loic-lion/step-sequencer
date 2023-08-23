@@ -8,6 +8,7 @@
   overflow: hidden;
   white-space: nowrap;
   position: absolute;
+  visibility: hidden;
 }
 body {
   background-color: #cacaca;
@@ -30,13 +31,13 @@ body {
       height: 30px;
       width: 30px;
       border: none;
-      background-color: rgb(171, 209, 32);
+      background-color: $ColorOrange;
       border-radius: 3px;
       margin: 0px 15px 15px 0px;
 
       &:hover {
-        background-color: rgb(186, 231, 24);
-        box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+        background-color: $ColorOrangeHover;
+        box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
       }
     }
   }
@@ -54,7 +55,7 @@ body {
           @include invisibleInput();
 
           &:checked + #{$cell}__content {
-            background-color: rgb(171, 209, 32);
+            background-color: rgb(209, 153, 32);
           }
         }
         &__content {
@@ -67,31 +68,17 @@ body {
           }
 
           &.red-bg {
-            background-color: rgb(100, 150, 107);
+            background-color: $ColorOrangeSequencer;
           }
         }
       }
     }
   }
 }
-
-.step-indicator {
-  display: flex;
-  margin-top: 10px;
-  margin-left: 99px;
-
-  &__step {
-    width: 10px;
-    height: 10px;
-    border: 1px solid #92c76e;
-    margin-right: 13px;
-  }
-}
-
 .active-step {
-  background-color: rgb(171, 209, 32);
+  background-color: rgb(255, 145, 0);
 }
-.sample-button {
+.sample__button {
   background-color: #e0e0e0;
   border: none;
   border-radius: 4px;
@@ -130,14 +117,14 @@ body {
       border: none;
       border-radius: 3px;
       margin-bottom: 10px;
-      background-color: rgb(171, 209, 32);
+      background-color: $ColorOrange;
       &:hover {
-        background-color: rgb(186, 231, 24);
-        box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+        background-color: $ColorOrangeHover;
+        box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
       }
       &:active {
-        background-color: rgb(134, 158, 47);
-        box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+        background-color: $ColorOrangeActive;
+        box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
       }
     }
     &__options {
@@ -146,7 +133,7 @@ body {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
-      column-gap: 10px;
+      column-gap: 35px;
 
       div {
         width: 200px;
@@ -158,6 +145,60 @@ body {
           border: none;
           border-radius: 3px;
           width: 50px;
+        }
+      }
+      &__graph {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        width: 415px;
+        height: 150px;
+        &__navbar {
+          display: flex;
+          position: absolute;
+          top: -22px;
+          width: 415px;
+          li {
+            &:first-child {
+              margin-left: 4px;
+            }
+            &:last-child {
+              margin-left: 2px;
+            }
+            a {
+              text-decoration: none;
+              color: black;
+              background-color: $ColorOrange;
+              padding: 4px;
+              border-radius: 4px 4px 0px 0px;
+              &:hover {
+                background-color: $ColorOrangeHover;
+                box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+              }
+              &:active {
+                background-color: $ColorOrangeActive;
+                box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+              }
+            }
+          }
+        }
+        #envelope {
+          width: 415px;
+          height: 130px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          background-color: #6b6b6b3a;
+          box-shadow: inset 0px 0px 5px 0px black;
+        }
+        #frequencies {
+          width: 415px;
+          height: 130px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          background-color: #6b6b6b3a;
+          box-shadow: inset 0px 0px 5px 0px black;
         }
       }
     }
@@ -192,16 +233,16 @@ body {
       }
       button {
         border: none;
-        background-color: rgb(171, 209, 32);
+        background-color: $ColorOrange;
         border-radius: 3px;
 
         &:hover {
-          background-color: rgb(186, 231, 24);
-          box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+          background-color: $ColorOrangeHover;
+          box-shadow: $ColorOrangeShadow;
         }
         &:active {
-          background-color: rgb(134, 158, 47);
-          box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+          background-color: $ColorOrangeActive;
+          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
         }
       }
       div {
@@ -226,19 +267,19 @@ body {
         margin-right: 20px;
       }
       button {
-        background-color: rgb(171, 209, 32);
+        background-color: $ColorOrange;
         border-style: none;
         cursor: pointer;
         margin-right: 5px;
         border-radius: 3px;
 
         &:hover {
-          background-color: rgb(186, 231, 24);
-          box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+          background-color: $ColorOrangeHover;
+          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
         }
         &:active {
-          background-color: rgb(134, 158, 47);
-          box-shadow: 0px 0px 6px 0px rgb(188, 243, 6);
+          background-color: $ColorOrangeActive;
+          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
         }
       }
     }
@@ -273,7 +314,7 @@ body {
             @include invisibleInput();
 
             &:checked + #{$cell}__content {
-              background-color: rgb(171, 209, 32);
+              background-color: rgb(209, 153, 32);
             }
           }
           select {
@@ -306,7 +347,7 @@ input[type="range"] {
   cursor: pointer;
   width: 50px;
   &::-webkit-slider-runnable-track {
-    background-color: rgb(171, 209, 32);
+    background-color: $ColorOrange;
     border-radius: 0.5rem;
     height: 8px;
   }
@@ -320,7 +361,7 @@ input[type="range"] {
     width: 6px;
   }
   &:hover::-webkit-slider-runnable-track {
-    background-color: rgb(121, 145, 38);
+    background-color: $ColorOrangeActive;
   }
   &:hover::-webkit-slider-thumb {
     background-color: #c7c7c7;
@@ -346,7 +387,7 @@ input[type="range"] {
     background-color: rgb(126, 126, 126);
   }
   &:active {
-    background-color: rgb(171, 209, 32);
+    background-color: $ColorOrange;
   }
 }
 
@@ -364,6 +405,6 @@ input[type="range"] {
 }
 .active {
   z-index: 2;
-  box-shadow: 0 0 0 2px rgb(204, 255, 20);
+  box-shadow: 0 0 0 2px rgb(255, 196, 0);
   border-radius: 5px;
 }
