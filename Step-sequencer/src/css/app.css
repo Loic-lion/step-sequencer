@@ -317,7 +317,7 @@ body {
   background-color: rgba(107, 107, 107, 0.2274509804);
   box-shadow: inset 0px 0px 5px 0px black;
 }
-.synth__head__options__graph #frequencies {
+.synth__head__options__graph #wavefrom {
   width: 415px;
   height: 130px;
   border-radius: 5px;

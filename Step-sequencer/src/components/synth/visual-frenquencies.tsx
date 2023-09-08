@@ -6,53 +6,53 @@ interface VisualFrequenciesProps {
 }
 
 export default function VisualFrequencies({ synth }: VisualFrequenciesProps) {
-  const canvasRefFrequencies = useRef<HTMLCanvasElement | null>(null);
+  const canvasRefWaveform = useRef<HTMLCanvasElement | null>(null);
   const animationIdRef = useRef<number | null>(null);
-  const minDecibels = -120;
-  const maxDecibels = 0;
 
   useEffect(() => {
-    const canvas = canvasRefFrequencies.current;
+    const canvas :any = canvasRefWaveform.current;
     const ctx = canvas?.getContext("2d");
 
-    if (!canvas || !ctx) return;
+    if (!canvas || !ctx || !synth) return;
 
-    const fftSize = 512;
-    const fft = new Tone.FFT(fftSize);
-
-    if (synth) {
-      synth.connect(fft);
-    }
+    const audioContext = Tone.context;
+    const analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+    synth.connect(analyser);
 
     function draw() {
       if (!ctx) return;
 
-      const dataArray = fft.getValue();
-      if (!canvas) return;
+      const bufferLength = analyser.fftSize;
+      const dataArray = new Uint8Array(bufferLength);
+
+      analyser.getByteTimeDomainData(dataArray);
+
       const width = canvas.width;
       const height = canvas.height;
+      const sliceWidth = (width * 1.0) / bufferLength;
+      let x = 0;
 
       ctx.clearRect(0, 0, width, height);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(212, 135, 34, 0.8)";
       ctx.beginPath();
 
-      ctx.moveTo(0, height);
+      for (let i = 0; i < bufferLength; i++) {
+        const v = dataArray[i] / 128.0;
+        const y = (v * height) / 2;
 
-      for (let i = 0; i < dataArray.length; i++) {
-        const frequency = i * (Tone.context.sampleRate / fftSize);
-        const value = dataArray[i];
-        const normalizedValue =
-          (value - minDecibels) / (maxDecibels - minDecibels);
-        const x = (frequency / (Tone.context.sampleRate / 2)) * width;
-        const y = (1 - normalizedValue) * height;
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
 
-        ctx.lineTo(x, y);
+        x += sliceWidth;
       }
 
-      ctx.lineTo(width, height);
-      ctx.closePath();
-
-      ctx.fillStyle = "rgba(212, 135, 34, 0.4)";
-      ctx.fill();
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
 
       animationIdRef.current = requestAnimationFrame(draw);
     }
@@ -60,9 +60,7 @@ export default function VisualFrequencies({ synth }: VisualFrequenciesProps) {
     draw();
 
     return () => {
-      if (synth) {
-        synth.disconnect(fft);
-      }
+      synth.disconnect(analyser);
       if (animationIdRef.current !== null) {
         cancelAnimationFrame(animationIdRef.current);
       }
@@ -70,13 +68,8 @@ export default function VisualFrequencies({ synth }: VisualFrequenciesProps) {
   }, [synth]);
 
   return (
-    <canvas
-      id="frequencies"
-      ref={canvasRefFrequencies}
-      width={415}
-      height={130}
-    >
-      Visual frequencies not supported by your browser
+    <canvas id="wavefrom" ref={canvasRefWaveform} width={415} height={130}>
+      Waveform not supported by your browser
     </canvas>
   );
 }
