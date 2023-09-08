@@ -1,7 +1,6 @@
 import React from "react";
 import * as Tone from "tone";
-import "./css/app.css";
-import ButtonPlayStop from "./ButtonPlayStop";
+import ButtonPlayStop from "../menu/buttons/ButtonPlayStop";
 import SampleButton from "./SampleButton";
 import AudioFileUploader from "./AudioFileUploader";
 import Synthetizer from "../synth/synth";
@@ -94,7 +93,6 @@ export default function StepSequencer({ numOfSteps }: Props) {
     <>
       <section className="container">
         <div className="container__player">
-          <ButtonPlayStop setIsPlaying={setIsPlaying} />
           <AudioFileUploader onFileUpload={handleFileUpload} />
         </div>
         <div className="container__flex">
