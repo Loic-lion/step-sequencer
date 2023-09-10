@@ -10,8 +10,9 @@ export default function SynthSequencer({ synth }: SynthSequencerProps) {
 
   const stepIds = [...Array(numOfSteps).keys()] as const;
 
-  const [currentStep, setCurrentStep] = React.useState<number>(0);
   const [selectedOctaves, setSelectedOctaves] = React.useState<number[]>([4]);
+  const [activeSteps, setActiveSteps] = React.useState<number[]>([]);
+  
 
   const stepRefs = React.useRef<Array<Array<HTMLInputElement>>>([]);
   const notes = [
@@ -32,6 +33,11 @@ export default function SynthSequencer({ synth }: SynthSequencerProps) {
   const octaveNotes = selectedOctaves.flatMap((octave) =>
     notes.map((note) => `${note}${octave}`)
   );
+  const [noteDurations, setNoteDurations] = React.useState<number[][]>(
+    Array.from({ length: octaveNotes.length }, () =>
+      Array.from({ length: numOfSteps }, () => 16)
+    )
+  );
 
   const seqRef = React.useRef<Tone.Sequence | null>(null);
 
@@ -41,6 +47,12 @@ export default function SynthSequencer({ synth }: SynthSequencerProps) {
     } else {
       setSelectedOctaves([...selectedOctaves, octave]);
     }
+    setNoteDurations((prevDurations) =>
+      prevDurations.map((durations) => [
+        ...durations,
+        ...Array(numOfSteps - durations.length).fill(16),
+      ])
+    );
   };
 
   React.useEffect(() => {
@@ -48,11 +60,15 @@ export default function SynthSequencer({ synth }: SynthSequencerProps) {
 
     seqRef.current = new Tone.Sequence(
       (time, step) => {
-        setCurrentStep(step);
+        setActiveSteps([step]);
 
         octaveNotes.forEach((note, trackId) => {
           if (stepRefs.current[trackId][step]?.checked) {
-            synth.triggerAttackRelease(note, "16n", time);
+            synth.triggerAttackRelease(
+              note,
+              `${noteDurations[trackId][step]}n`,
+              time
+            );
           }
         });
       },
@@ -63,7 +79,7 @@ export default function SynthSequencer({ synth }: SynthSequencerProps) {
     return () => {
       seqRef.current?.dispose();
     };
-  }, [synth, selectedOctaves]);
+  }, [synth, selectedOctaves, noteDurations]);
 
   return (
     <>
@@ -101,9 +117,26 @@ export default function SynthSequencer({ synth }: SynthSequencerProps) {
                 />
                 <div
                   className={`synth__sequencer__container__track__step__content ${
-                    currentStep === stepId ? "active" : ""
+                    activeSteps.includes(stepId) ? "active" : ""
                   }`}
                 />
+                <select
+                  value={noteDurations[trackId][stepId]}
+                  onChange={(e) => {
+                    const updatedDurations = [...noteDurations];
+                    updatedDurations[trackId][stepId] = parseInt(
+                      e.target.value,
+                      10
+                    );
+                    setNoteDurations(updatedDurations);
+                  }}
+                >
+                  <option value={16}>16n</option>
+                  <option value={8}>8n</option>
+                  <option value={4}>4n</option>
+                  <option value={2}>2n</option>
+                </select>
+                
               </label>
             ))}
           </div>

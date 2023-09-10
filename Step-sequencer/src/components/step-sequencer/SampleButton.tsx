@@ -3,6 +3,6 @@ type SampleButtonProps = {
 };
 
 function SampleButton({ sampleName }: SampleButtonProps) {
-  return <button className="sample-button">{sampleName}</button>;
+  return <button className="sample__button">{sampleName}</button>;
 }
 export default SampleButton;
