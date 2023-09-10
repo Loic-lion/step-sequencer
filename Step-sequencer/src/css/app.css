@@ -132,8 +132,15 @@ table {
 body {
   background-color: #cacaca;
 }
+body #root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .container {
+  width: 909px;
   background-color: rgb(49, 49, 49);
   padding: 20px;
   border-radius: 10px;
@@ -153,7 +160,6 @@ body {
   border: none;
   background-color: rgb(228, 150, 48);
   border-radius: 3px;
-  margin: 0px 15px 15px 0px;
 }
 .container__player__onoff:hover {
   background-color: rgb(250, 158, 38);

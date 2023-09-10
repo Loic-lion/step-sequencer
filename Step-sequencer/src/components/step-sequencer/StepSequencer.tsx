@@ -1,6 +1,5 @@
 import React from "react";
 import * as Tone from "tone";
-import ButtonPlayStop from "../menu/buttons/ButtonPlayStop";
 import SampleButton from "./SampleButton";
 import AudioFileUploader from "./AudioFileUploader";
 import Synthetizer from "../synth/synth";
@@ -44,10 +43,7 @@ export default function StepSequencer({ numOfSteps }: Props) {
   const [samples, setSamples] = React.useState<Sample[]>(initialSamples);
   const trackIds = [...Array(samples.length).keys()] as const;
   const stepIds = [...Array(numOfSteps).keys()] as const;
-
-  const [isPlaying, setIsPlaying] = React.useState(false);
   const [currentStep, setCurrentStep] = React.useState<number>(0);
-  console.log(isPlaying);
   const tracksRef = React.useRef<Track[]>([]);
   const stepRef = React.useRef<HTMLInputElement[][]>([[]]);
   const seqRef = React.useRef<Tone.Sequence | null>(null);
