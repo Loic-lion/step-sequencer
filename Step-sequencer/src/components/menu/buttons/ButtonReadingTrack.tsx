@@ -1,5 +1,9 @@
+import IconReadTrack from "../../../../public/icons/chronologie.png"
+
 function ButtonReadingTrack() {
-  return <button></button>;
+  return <button>
+ <img src={IconReadTrack} />
+  </button>;
 }
 
 export default ButtonReadingTrack;

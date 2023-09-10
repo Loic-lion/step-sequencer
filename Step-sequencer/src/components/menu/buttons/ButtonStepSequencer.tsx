@@ -1,9 +1,9 @@
-import IconSynth from "../../../../public/icons/mpd-top-view.png";
+import IconStepSequencer from "../../../../public/icons/mpd-top-view.png";
 
 function ButtonStepSequencer() {
   return (
     <button>
-      <img src={IconSynth} />
+      <img src={IconStepSequencer} />
     </button>
   );
 }
