@@ -12,13 +12,25 @@ function Header() {
   return (
     <header>
       <h1> DAW Project</h1>
-      <section className="container_menu">
-        <ButtonPlayStop setIsPlaying={setIsPlaying} />
-        <ButtonBPM />
-        <ButtonReadingTrack />
-        <ButtonSynth />
-        <ButtonStepSequencer />
-      </section>
+      <nav className="container_menu">
+        <ul>
+          <li>
+            <ButtonPlayStop setIsPlaying={setIsPlaying} />
+          </li>
+          <li>
+            <ButtonBPM />
+          </li>
+          <li>
+            <ButtonReadingTrack />
+          </li>
+          <li>
+            <ButtonSynth />
+          </li>
+          <li>
+            <ButtonStepSequencer />
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 }
