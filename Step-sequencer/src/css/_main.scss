@@ -1,0 +1,429 @@
+@mixin invisibleInput {
+  border: 0px;
+  clip-path: rect(0px, 0px, 0px, 0px);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  visibility: hidden;
+}
+body {
+  background-color: #cacaca;
+  font-family: 'Signika Negative', sans-serif;
+  #root {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    main{
+      margin-top: 100px;
+      height: 500px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+.container {
+  width: 909px;
+  background-color: rgb(49, 49, 49);
+  padding: 20px;
+  border-radius: 10px;
+  border: solid 1px rgb(162, 162, 162);
+  box-shadow: 0px 9px 17px #747474;
+  margin-bottom: 50px;
+  &__player {
+    display: flex;
+
+    input {
+      margin-top: 5px;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    &__onoff {
+      text-align: center;
+      height: 30px;
+      width: 30px;
+      border: none;
+      background-color: $ColorOrange;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: $ColorOrangeHover;
+        box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+      }
+    }
+  }
+  &__flex__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    &__row {
+      display: flex;
+      column-gap: 5px;
+      &__cell {
+        $cell: &;
+        cursor: pointer;
+        &__input {
+          @include invisibleInput();
+
+          &:checked + #{$cell}__content {
+            background-color: rgb(209, 153, 32);
+          }
+        }
+        &__content {
+          width: 20px;
+          height: 40px;
+          border-radius: 3px;
+
+          &.gray-bg {
+            background-color: rgb(172, 172, 172);
+          }
+
+          &.red-bg {
+            background-color: $ColorOrangeSequencer;
+          }
+        }
+      }
+    }
+  }
+}
+.active-step {
+  background-color: rgb(255, 145, 0);
+}
+.sample__button {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  width: 90px;
+  height: 40px;
+  cursor: pointer;
+  &:hover {
+    background-color: #9c4545;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.synth {
+  min-height: 200px;
+  width: 949px;
+  background-color: rgb(49, 49, 49);
+  border-radius: 10px;
+  border: solid 1px rgb(162, 162, 162);
+  box-shadow: 0px 9px 17px #747474;
+  hr {
+    width: 90%;
+  }
+  &__head {
+    color: white;
+    margin-left: 20px;
+    h1 {
+      font-size: 30px;
+      margin: 20px 0px 10px 0px;
+      color: white;
+    }
+    &__show__effects {
+      border: none;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      background-color: $ColorOrange;
+      &:hover {
+        background-color: $ColorOrangeHover;
+        box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+      }
+      &:active {
+        background-color: $ColorOrangeActive;
+        box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+      }
+    }
+    &__options {
+      width: 400px;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      column-gap: 35px;
+
+      div {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        select {
+          border: none;
+          border-radius: 3px;
+          width: 50px;
+        }
+      }
+      &__graph {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        width: 415px;
+        height: 150px;
+        &__navbar {
+          display: flex;
+          position: absolute;
+          top: -22px;
+          width: 415px;
+          li {
+            &:first-child {
+              margin-left: 4px;
+            }
+            &:last-child {
+              margin-left: 2px;
+            }
+            a {
+              text-decoration: none;
+              color: black;
+              background-color: $ColorOrange;
+              padding: 4px;
+              border-radius: 4px 4px 0px 0px;
+              &:hover {
+                background-color: $ColorOrangeHover;
+                box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+              }
+              &:active {
+                background-color: $ColorOrangeActive;
+                box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+              }
+            }
+          }
+        }
+        #envelope {
+          width: 415px;
+          height: 130px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          background-color: #6b6b6b3a;
+          box-shadow: inset 0px 0px 5px 0px black;
+        }
+        #wavefrom {
+          width: 415px;
+          height: 130px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          background-color: #6b6b6b3a;
+          box-shadow: inset 0px 0px 5px 0px black;
+        }
+      }
+    }
+  }
+
+  &__effect {
+    display: flex;
+    margin: 20px 20px 0px 20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    .reverb-control,
+    .tremolo-control,
+    .distortion-control,
+    .chorus-control,
+    .delay-control,
+    .phaser-control {
+      height: fit-content;
+      min-width: 150px;
+      min-height: 132px;
+      padding: 10px;
+      background-color: rgb(162, 162, 162);
+      border-radius: 8px;
+      margin-right: 10px;
+      margin-bottom: 15px;
+      &:hover {
+        background-color: rgb(141, 141, 141);
+      }
+      h2 {
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 10px;
+      }
+      button {
+        border: none;
+        background-color: $ColorOrange;
+        border-radius: 3px;
+
+        &:hover {
+          background-color: $ColorOrangeHover;
+          box-shadow: $ColorOrangeShadow;
+        }
+        &:active {
+          background-color: $ColorOrangeActive;
+          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+        }
+      }
+      div {
+        display: flex;
+        justify-content: space-between;
+        select {
+          border: none;
+          border-radius: 3px;
+          width: 50px;
+        }
+      }
+    }
+  }
+  &__sequencer {
+    overflow: hidden;
+    margin-bottom: 20px;
+    &__selector {
+      margin: 0px 0px 20px 40px;
+
+      &__octave {
+        color: white;
+        margin-right: 20px;
+      }
+      button {
+        background-color: $ColorOrange;
+        border-style: none;
+        cursor: pointer;
+        margin-right: 5px;
+        border-radius: 3px;
+
+        &:hover {
+          background-color: $ColorOrangeHover;
+          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+        }
+        &:active {
+          background-color: $ColorOrangeActive;
+          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+        }
+      }
+    }
+    &__container {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      margin: 0px 0px 20px 20px;
+      overflow-y: scroll;
+      height: 300px;
+      &__track {
+        display: flex;
+        column-gap: 5px;
+        &:first-child {
+          margin-top: 5px;
+        }
+        &:last-child {
+          margin-bottom: 60px;
+        }
+
+        &__note {
+          text-align: center;
+          background-color: #ffffff;
+          border: 1px solid #ccc;
+          width: 90px;
+          border-radius: 0px 3px 3px 0px;
+        }
+        &__step {
+          $cell: &;
+          cursor: pointer;
+          input {
+            @include invisibleInput();
+
+            &:checked + #{$cell}__content {
+              background-color: rgb(209, 153, 32);
+            }
+          }
+          select {
+            width: 20px;
+          }
+          &__content {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            background-color: rgb(172, 172, 172);
+
+            &.gray-bg {
+              background-color: rgb(172, 172, 172);
+            }
+
+            &.red-bg {
+              background-color: rgb(100, 150, 107);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  width: 50px;
+  &::-webkit-slider-runnable-track {
+    background-color: $ColorOrange;
+    border-radius: 0.5rem;
+    height: 8px;
+  }
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -3px;
+    background-color: #6b6b6b;
+    border-radius: 0px;
+    height: 14px;
+    width: 6px;
+  }
+  &:hover::-webkit-slider-runnable-track {
+    background-color: $ColorOrangeActive;
+  }
+  &:hover::-webkit-slider-thumb {
+    background-color: #c7c7c7;
+  }
+}
+
+////////////////////
+.synth__piano {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100px;
+  background-color: #f0f0f0;
+  overflow: hidden;
+}
+
+.piano-key {
+  width: 20px;
+  height: 100px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(126, 126, 126);
+  }
+  &:active {
+    background-color: $ColorOrange;
+  }
+}
+
+.white__key {
+  background-color: white;
+}
+
+.black__key {
+  position: relative;
+  width: 15px;
+  height: 60px;
+  margin: 40px -10px;
+  background-color: black;
+  z-index: 1;
+}
+.active {
+  z-index: 2;
+  box-shadow: 0 0 0 2px rgb(255, 196, 0);
+  border-radius: 5px;
+}
