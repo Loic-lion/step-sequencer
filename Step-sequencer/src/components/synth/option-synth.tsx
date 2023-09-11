@@ -204,18 +204,22 @@ const SynthOptions: React.FC<SynthOptionsProps> = ({ synth }) => {
                 <Link to="/envelope">Envelope</Link>
               </li>
               <li>
-                <Link to="/frequencies">Frequencies</Link>
+                <Link to="/wavefrom">Wavefrom</Link>
               </li>
             </ul>
           </nav>
 
           <Routes>
             <Route
+              path=""
+              element={<VisualEnvelope envelope={synthOptions.envelope} />}
+            />
+            <Route
               path="/envelope"
               element={<VisualEnvelope envelope={synthOptions.envelope} />}
             />
             <Route
-              path="/frequencies"
+              path="/wavefrom"
               element={<VisualFrequencies synth={synth} />}
             />
           </Routes>

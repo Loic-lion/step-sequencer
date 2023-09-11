@@ -159,6 +159,7 @@ body #root main {
   border: solid 1px rgb(162, 162, 162);
   box-shadow: 0px 9px 17px #747474;
   margin-bottom: 50px;
+  display: block;
 }
 .container__player {
   display: flex;
@@ -168,15 +169,7 @@ body #root main {
   color: white;
   margin-bottom: 10px;
 }
-.container__player__onoff {
-  text-align: center;
-  height: 30px;
-  width: 30px;
-  border: none;
-  background-color: rgb(228, 150, 48);
-  border-radius: 3px;
-}
-.container__player__onoff:hover {
+.container__player:hover {
   background-color: rgb(250, 158, 38);
   box-shadow: 0px 0px 6px 0px rgb(252, 161, 42);
 }
@@ -221,6 +214,10 @@ body #root main {
   background-color: rgb(211, 165, 105);
 }
 
+.active__sequencer {
+  display: none;
+}
+
 .active-step {
   background-color: rgb(255, 145, 0);
 }
@@ -236,7 +233,7 @@ body #root main {
   cursor: pointer;
 }
 .sample__button:hover {
-  background-color: #9c4545;
+  background-color: rgb(255, 145, 0);
 }
 .sample__button:focus {
   outline: none;
@@ -249,6 +246,7 @@ body #root main {
   border-radius: 10px;
   border: solid 1px rgb(162, 162, 162);
   box-shadow: 0px 9px 17px #747474;
+  display: none;
 }
 .synth hr {
   width: 90%;
@@ -261,6 +259,7 @@ body #root main {
   font-size: 30px;
   margin: 20px 0px 10px 0px;
   color: white;
+  font-family: "Gugi", cursive;
 }
 .synth__head__show__effects {
   border: none;
@@ -519,6 +518,10 @@ body #root main {
 }
 .synth__sequencer__container__track__step__content.red-bg {
   background-color: rgb(100, 150, 107);
+}
+
+.active__synth {
+  display: block;
 }
 
 input[type=range] {

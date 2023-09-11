@@ -2,8 +2,8 @@ import "../../../css/option.css";
 import useOptionStore from "../../Store/option-store";
 
 function Option() {
+  
   const { active } = useOptionStore() as { active: boolean };
-
   const optionClass = active ? "active__option" : "";
 
   return (
