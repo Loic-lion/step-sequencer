@@ -9,9 +9,12 @@ import FeedbackDelayControl from "../effects/delay";
 import PhaserControl from "../effects/phaser";
 import Piano from "./piano";
 import SynthSequencer from "./sequencer";
-
+import useOptionStore from "../Store/option-store";
 
 export default function Synthetizer() {
+  const { activeSynth } = useOptionStore() as { activeSynth: boolean };
+  const optionSynth = activeSynth ? "active__synth" : "";
+
   const [synth, setSynth] = useState<Tone.PolySynth | null>(null);
   const [activeNotes, setActiveNotes] = useState<{ [key: string]: boolean }>(
     {}
@@ -111,7 +114,7 @@ export default function Synthetizer() {
   }
 
   return (
-    <section className="synth">
+    <section className={`synth ${optionSynth}`}>
       <div className="synth__head">
         <h1>PolySynth</h1>
         <SynthOptions synth={synth} />
