@@ -1,0 +1,46 @@
+@import "variables";
+
+.container__option {
+  color: white;
+  width: 200px;
+  height: auto;
+  background-color: rgb(58, 58, 58);
+  position: fixed;
+  left: 30px;
+  top: -100px;
+  z-index: 4;
+  border-radius: 0px 0px 10px 10px;
+  transition: top 0.3s ease;
+  nav {
+    margin-left: 15px;
+    ul {
+      li {
+        margin-bottom: 30px;
+        &:first-child {
+          margin-top: 50px;
+        }
+
+        button {
+          margin-left: 5px;
+          border: none;
+          background-color: $ColorOrange;
+          border-radius: 3px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $ColorOrangeHover;
+            box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+            scale: 1.2;
+          }
+          &:active {
+            scale: 1;
+            background-color: $ColorOrange;
+          }
+        }
+      }
+    }
+  }
+}
+.active__option {
+  top: 70px;
+}
