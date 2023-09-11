@@ -3,6 +3,7 @@ import * as Tone from "tone";
 import SampleButton from "./SampleButton";
 import AudioFileUploader from "./AudioFileUploader";
 import Synthetizer from "../synth/synth";
+import useOptionStore from "../Store/option-store";
 
 const NOTE = "C4";
 
@@ -21,6 +22,10 @@ type Track = {
 };
 
 export default function StepSequencer({ numOfSteps }: Props) {
+  const { activeSequencer } = useOptionStore() as { activeSequencer: boolean };
+
+  const sequencerClass = activeSequencer ? "active__sequencer" : "";
+
   const initialSamples: Sample[] = [
     {
       url: "/Hit.wav",
@@ -87,7 +92,7 @@ export default function StepSequencer({ numOfSteps }: Props) {
 
   return (
     <>
-      <section className="container">
+      <section className={`container ${sequencerClass}`}>
         <div className="container__player">
           <AudioFileUploader onFileUpload={handleFileUpload} />
         </div>
