@@ -2,6 +2,7 @@ import "../../../css/mixer.css";
 import useButtonStore from "../../Store/mixer-store";
 import Master from "./master";
 
+
 function Mixer() {
   const { active } = useButtonStore() as { active: boolean };
 

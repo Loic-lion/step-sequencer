@@ -169,7 +169,7 @@ body #root main {
   color: white;
   margin-bottom: 10px;
 }
-.container__player:hover {
+.container__player input:hover {
   background-color: rgb(250, 158, 38);
   box-shadow: 0px 0px 6px 0px rgb(252, 161, 42);
 }
@@ -434,36 +434,15 @@ body #root main {
   width: 50px;
 }
 .synth__sequencer {
+  height: 0px;
   overflow: hidden;
-  margin-bottom: 20px;
-}
-.synth__sequencer__selector {
-  margin: 0px 0px 20px 40px;
-}
-.synth__sequencer__selector__octave {
-  color: white;
-  margin-right: 20px;
-}
-.synth__sequencer__selector button {
-  background-color: rgb(228, 150, 48);
-  border-style: none;
-  cursor: pointer;
-  margin-right: 5px;
-  border-radius: 3px;
-}
-.synth__sequencer__selector button:hover {
-  background-color: rgb(250, 158, 38);
-  box-shadow: 0px 0px 6px 0px rgb(252, 161, 42);
-}
-.synth__sequencer__selector button:active {
-  background-color: rgb(177, 119, 45);
-  box-shadow: 0px 0px 6px 0px rgb(252, 161, 42);
+  padding: 0px 0px 10px 20px;
 }
 .synth__sequencer__container {
   display: flex;
   flex-direction: column;
   row-gap: 5px;
-  margin: 0px 0px 20px 20px;
+  margin: 10px 0px 20px 0px;
   overflow-y: scroll;
   height: 300px;
 }
@@ -592,4 +571,42 @@ input[type=range]:hover::-webkit-slider-thumb {
   z-index: 2;
   box-shadow: 0 0 0 2px rgb(255, 196, 0);
   border-radius: 5px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e49630 #dfe9eb;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #e49630;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #ffa836;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #cf882c;
 }/*# sourceMappingURL=app.css.map */
