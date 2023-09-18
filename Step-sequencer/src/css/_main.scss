@@ -45,11 +45,10 @@ body {
       margin-top: 5px;
       color: white;
       margin-bottom: 10px;
-    }
-
-    &:hover {
-      background-color: $ColorOrangeHover;
-      box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+      &:hover {
+        background-color: $ColorOrangeHover;
+        box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
+      }
     }
   }
   &__flex__list {
@@ -274,37 +273,15 @@ body {
     }
   }
   &__sequencer {
+    height: 0px;
     overflow: hidden;
-    margin-bottom: 20px;
-    &__selector {
-      margin: 0px 0px 20px 40px;
+    padding: 0px 0px 10px 20px;
 
-      &__octave {
-        color: white;
-        margin-right: 20px;
-      }
-      button {
-        background-color: $ColorOrange;
-        border-style: none;
-        cursor: pointer;
-        margin-right: 5px;
-        border-radius: 3px;
-
-        &:hover {
-          background-color: $ColorOrangeHover;
-          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
-        }
-        &:active {
-          background-color: $ColorOrangeActive;
-          box-shadow: 0px 0px 6px 0px $ColorOrangeShadow;
-        }
-      }
-    }
     &__container {
       display: flex;
       flex-direction: column;
       row-gap: 5px;
-      margin: 0px 0px 20px 20px;
+      margin: 10px 0px 20px 0px;
       overflow-y: scroll;
       height: 300px;
       &__track {
@@ -427,4 +404,41 @@ input[type="range"] {
   z-index: 2;
   box-shadow: 0 0 0 2px rgb(255, 196, 0);
   border-radius: 5px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #e49630 #dfe9eb;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #e49630;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #ffa836;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #cf882c;
 }

@@ -22,6 +22,7 @@ export default function Synthetizer() {
   const [divSizes, setDivSizes] = useState({
     synthEffectHeight: "200px",
     pianoHeight: "100px",
+    sequencerHeight: "0px",
   });
 
   useEffect(() => {
@@ -110,6 +111,7 @@ export default function Synthetizer() {
       synthEffectHeight:
         prevSizes.synthEffectHeight === "200px" ? "0px" : "200px",
       pianoHeight: prevSizes.pianoHeight === "100px" ? "0px" : "100px",
+      sequencerHeight: prevSizes.sequencerHeight === "0px" ? "375px" : "0px",
     }));
   }
 
@@ -138,7 +140,10 @@ export default function Synthetizer() {
       <div className="synth__piano" style={{ height: divSizes.pianoHeight }}>
         <Piano synth={synth} />
       </div>
-      <div className="synth__sequencer">
+      <div
+        className="synth__sequencer"
+        style={{ height: divSizes.sequencerHeight }}
+      >
         <SynthSequencer synth={synth} />
       </div>
     </section>
