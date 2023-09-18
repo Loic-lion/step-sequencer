@@ -144,7 +144,6 @@ body #root {
 }
 body #root main {
   margin-top: 100px;
-  height: 500px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -576,7 +575,7 @@ input[type=range]:hover::-webkit-slider-thumb {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #e49630 #dfe9eb;
+  scrollbar-color: #e49630 rgba(223, 233, 235, 0);
 }
 
 /* Chrome, Edge and Safari */
@@ -587,7 +586,7 @@ input[type=range]:hover::-webkit-slider-thumb {
 
 *::-webkit-scrollbar-track {
   border-radius: 5px;
-  background-color: #dfe9eb;
+  background-color: rgba(223, 233, 235, 0);
 }
 
 *::-webkit-scrollbar-track:hover {

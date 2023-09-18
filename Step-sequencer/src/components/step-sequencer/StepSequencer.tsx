@@ -5,6 +5,7 @@ import AudioFileUploader from "./AudioFileUploader";
 import Synthetizer from "../synth/synth";
 import useOptionStore from "../Store/option-store";
 import PatternControls from "./Pattern-controls";
+import Piste from "../Piste-de-lecture/piste";
 
 const NOTE = "C4";
 
@@ -119,6 +120,7 @@ export default function StepSequencer({ numOfSteps }: Props) {
 
   return (
     <>
+      <Piste />
       <section className={`container ${sequencerClass}`}>
         <div className="container__player">
           <AudioFileUploader onFileUpload={handleFileUpload} />
