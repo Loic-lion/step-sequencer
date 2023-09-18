@@ -9,8 +9,9 @@ Node.js + npm install
 * Possibilité d'uploader ses propres samples
 * Possibilité de sound design son propre synthétiseur
 * Modifier le BPM global
+* Gestion des Patterns
+* Sequencer pour le synthé
 ## WIP
-* Piano Roll pour le synthé
 * Table de mixage + effets
 * Piste de lecture
 ## Aperçu
