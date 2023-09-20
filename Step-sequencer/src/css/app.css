@@ -159,6 +159,7 @@ body #root main {
   box-shadow: 0px 9px 17px #747474;
   margin-bottom: 50px;
   display: block;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 .container__player {
   display: flex;
@@ -213,6 +214,16 @@ body #root main {
   background-color: rgb(211, 165, 105);
 }
 
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 .active__sequencer {
   display: none;
 }
@@ -500,8 +511,19 @@ body #root main {
 
 .active__synth {
   display: block;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 input[type=range] {
   -webkit-appearance: none;
   -moz-appearance: none;

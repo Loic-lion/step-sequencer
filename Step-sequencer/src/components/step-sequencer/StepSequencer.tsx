@@ -48,18 +48,54 @@ export default function StepSequencer({ numOfSteps }: Props) {
   ];
 
   const [samples, setSamples] = useState<Sample[]>(initialSamples);
-  const trackIds = [...Array(samples.length).keys()] as const;
-  const stepIds = [...Array(numOfSteps).keys()] as const;
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const tracksRef = useRef<Track[]>([]);
-  const stepRef = useRef<HTMLInputElement[][]>([[]]);
-  const seqRef = useRef<Tone.Sequence | null>(null);
+  const [currentPatternIndex, setCurrentPatternIndex] = useState<number>(0);
+  const [sampleIsPlaying, setSampleIsPlaying] = useState<boolean[]>(
+    samples.map(() => false)
+  );
   const [patterns, setPatterns] = useState<Array<boolean[][]>>([
     Array(numOfSteps)
       .fill(false)
       .map(() => Array(samples.length).fill(false)),
   ]);
-  const [currentPatternIndex, setCurrentPatternIndex] = useState<number>(0);
+
+  const trackIds = [...Array(samples.length).keys()] as const;
+  const stepIds = [...Array(numOfSteps).keys()] as const;
+  const tracksRef = useRef<Track[]>([]);
+  const stepRef = useRef<HTMLInputElement[][]>([[]]);
+  const seqRef = useRef<Tone.Sequence | null>(null);
+
+ 
+  const triggerSample = (trackId: number) => {
+    const isPlaying = sampleIsPlaying[trackId];
+    if (!isPlaying) {
+      tracksRef.current[trackId]?.sampler.triggerAttack(NOTE);
+
+      setSampleIsPlaying((prev) =>
+        prev.map((val, index) => (index === trackId ? true : val))
+      );
+    }
+  };
+
+
+  const transitionToPattern = (nextPatternIndex: number) => {
+    const currentPattern = patterns[currentPatternIndex];
+    const nextPattern = patterns[nextPatternIndex];
+
+
+    nextPattern.forEach((step, stepId) => {
+      step.forEach((isChecked, trackId) => {
+        if (isChecked && !currentPattern[stepId][trackId]) {
+   
+          setTimeout(() => {
+            triggerSample(trackId);
+          }, 0);
+        }
+      });
+    });
+
+    setCurrentPatternIndex(nextPatternIndex);
+  };
 
   useEffect(() => {
     tracksRef.current = samples.map((sample, i) => ({
@@ -70,6 +106,7 @@ export default function StepSequencer({ numOfSteps }: Props) {
         },
       }).toDestination(),
     }));
+
     seqRef.current = new Tone.Sequence(
       (time, step) => {
         setCurrentStep(step);
@@ -81,12 +118,16 @@ export default function StepSequencer({ numOfSteps }: Props) {
       },
       [...stepIds],
       "16n"
-    ).start(0);
+    );
+
+
+    seqRef.current.start(0);
+
     return () => {
       seqRef.current?.dispose();
       tracksRef.current.forEach((trk) => trk.sampler.dispose());
     };
-  }, [samples, numOfSteps, currentPatternIndex]);
+  }, [samples, numOfSteps]);
 
   const handleFileUpload = (file: File) => {
     const name = prompt("Please enter the name for the sample:");
@@ -106,21 +147,24 @@ export default function StepSequencer({ numOfSteps }: Props) {
   };
 
   const handleSelectPattern = (index: number) => {
-    setCurrentPatternIndex(index);
+ 
+    transitionToPattern(index);
   };
 
   const handleDeletePattern = (index: number) => {
-    const updatedPatterns = [...patterns];
-    updatedPatterns.splice(index, 1);
-    setPatterns(updatedPatterns);
-    if (index === currentPatternIndex) {
-      setCurrentPatternIndex(0);
-    }
+    setPatterns((prevPatterns) => {
+      const updatedPatterns = [...prevPatterns];
+      updatedPatterns.splice(index, 1);
+      return updatedPatterns;
+    });
+    setCurrentPatternIndex(0);
+    transitionToPattern(0);
   };
 
   return (
     <>
-      <Piste />
+      <Piste
+      />
       <section className={`container ${sequencerClass}`}>
         <div className="container__player">
           <AudioFileUploader onFileUpload={handleFileUpload} />
